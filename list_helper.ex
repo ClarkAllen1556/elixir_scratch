@@ -14,7 +14,7 @@ defmodule ListHelper do
   end
 
   defp p_length(count, [head | tail]) do
-    count + 1
+    (count + 1)
     |> p_length(tail)
   end
 
@@ -28,7 +28,17 @@ defmodule ListHelper do
 
   defp p_sum(current_sum, [head | tail]) do
     # new_sum = current_sum + head
-    current_sum + head
+    (current_sum + head)
     |> p_sum(tail)
+  end
+
+  def sum_array(arr) do
+    p_sum_array(0, [], arr)
+  end
+
+  defp p_sum_array(_prev_sum, sums, []), do: Enum.reverse(sums)
+
+  defp p_sum_array(prev_sum, sums, [head | tail]) do
+    p_sum_array(prev_sum + head, [prev_sum + head | sums], tail)
   end
 end
